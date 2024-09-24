@@ -1,12 +1,12 @@
+from dataclasses import dataclass
 from typing import ( 
     Any, 
     Optional, 
-    Iterator, 
     Iterable,
+    Iterator, 
     Union,
     overload,
 )
-from dataclasses import dataclass
 
 
 @dataclass
