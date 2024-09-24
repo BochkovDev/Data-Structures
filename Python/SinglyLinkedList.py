@@ -31,9 +31,44 @@ class SinglyLinkedList:
                 current = current.next
             current.next = new_node
 
-    def clear(self) -> None:
-        '''Clear all nodes.'''
-        self.head = None
+    def prepend(self, data: Any) -> None:
+        '''Append node to the top of the list.'''
+        self.head = Node(data=data, next=self.head)
+
+    def insert(self, index: int, data: Any) -> None:
+        '''Insert node by index.'''
+        if index < 0:
+            raise IndexError('Index cannot be negative')
+        if index == 0:
+            self.prepend(data)
+            return
+        
+        current = self._get_node_at(index - 1)
+        new_node = Node(data=data, next=current.next)
+        current.next = new_node
+
+    def extend(self, iterable: Iterable[Any]) -> None:
+        '''Append elements from an iterable to the end of the list.'''
+        iterator = iter(iterable)
+        first_item = next(iterator, None)
+
+        if first_item is None:
+            return
+        
+        if self.head is None:
+            self.head = Node(data=first_item)
+            current = self.head
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+
+        current.next = Node(data=first_item)
+        current = current.next
+
+        for item in iterator:
+            current.next = Node(data=item)
+            current = current.next
 
     def delete(self, data: Any) -> None:
         '''Delete the first node with the value.'''
@@ -68,57 +103,6 @@ class SinglyLinkedList:
             raise IndexError('Index out of range')
         current.next = current.next.next
 
-    def extend(self, iterable: Iterable[Any]) -> None:
-        '''Append elements from an iterable to the end of the list.'''
-        iterator = iter(iterable)
-        first_item = next(iterator, None)
-
-        if first_item is None:
-            return
-        
-        if self.head is None:
-            self.head = Node(data=first_item)
-            current = self.head
-        else:
-            current = self.head
-            while current.next:
-                current = current.next
-
-        for item in iterator:
-            current.next = Node(data=item)
-            current = current.next
-
-    def find(self, data: Any) -> Optional[int]:
-        '''Find index of data.'''
-        current = self.head
-        index = 0
-        while current:
-            if current.data == data:
-                return index
-            current = current.next
-            index += 1
-        return None
-
-    def insert(self, index: int, data: Any) -> None:
-        '''Insert node by index.'''
-        if index < 0:
-            raise IndexError('Index cannot be negative')
-        if index == 0:
-            self.prepend(data)
-            return
-        
-        current = self._get_node_at(index - 1)
-        new_node = Node(data=data, next=current.next)
-        current.next = new_node
-
-    def is_empty(self) -> bool:
-        '''Return True if the list is empty.'''
-        return self.head is None
-
-    def prepend(self, data: Any) -> None:
-        '''Append node to the top of the list.'''
-        self.head = Node(data=data, next=self.head)
-
     def remove_duplicates(self) -> None:
         '''Remove duplicates from the list.'''
         if not self.head:
@@ -135,6 +119,21 @@ class SinglyLinkedList:
                 seen.add(current.next.data)
                 current = current.next
 
+    def clear(self) -> None:
+        '''Clear all nodes.'''
+        self.head = None
+
+    def find(self, data: Any) -> Optional[int]:
+        '''Find index of data.'''
+        current = self.head
+        index = 0
+        while current:
+            if current.data == data:
+                return index
+            current = current.next
+            index += 1
+        return None
+
     def reverse(self) -> None:
         '''Reverse the list.'''
         previous = None
@@ -147,6 +146,10 @@ class SinglyLinkedList:
             current = next_node
 
         self.head = previous
+
+    def is_empty(self) -> bool:
+        '''Return True if the list is empty.'''
+        return self.head is None
 
     def _get_node_at(self, index: int) -> Node:
         '''Helper method to retrieve node by index.'''
