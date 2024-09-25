@@ -1,15 +1,15 @@
 import pytest
-from singly_linked_list import SinglyLinkedList
+from doubly_linked_list import DoublyLinkedList
 
 
 @pytest.fixture
 def empty_list():
-    return SinglyLinkedList()
+    return DoublyLinkedList()
 
 
 @pytest.fixture
 def filled_list():
-    lst = SinglyLinkedList()
+    lst = DoublyLinkedList()
     lst.extend([1, 2, 3])
     return lst
 
@@ -88,7 +88,7 @@ def test_delete_at(filled_list, index, expected):
     ([1, 1, 1], [1]),
 ])
 def test_remove_duplicates(initial_values, expected):
-    lst = SinglyLinkedList()
+    lst = DoublyLinkedList()
     lst.extend(initial_values)
     lst.remove_duplicates()
     assert list(lst) == expected
@@ -97,6 +97,8 @@ def test_remove_duplicates(initial_values, expected):
 def test_clear(filled_list):
     filled_list.clear()
     assert filled_list.head == None
+    assert filled_list.tail == None
+
 
 @pytest.mark.parametrize("value, expected", [
     (1, 0),
@@ -114,7 +116,7 @@ def test_find(filled_list, value, expected):
     ([], []),
 ])
 def test_reverse(initial_values, expected):
-    lst = SinglyLinkedList()
+    lst = DoublyLinkedList()
     lst.extend(initial_values)
     lst.reverse()
     assert list(lst) == expected
@@ -132,7 +134,7 @@ def test_del_item(filled_list):
 
 
 def test_add(filled_list):
-    list1 = SinglyLinkedList()
+    list1 = DoublyLinkedList()
     list1.extend([4, 5])
     new_list = filled_list + list1
     assert list(new_list) == [1, 2, 3, 4, 5]
@@ -151,8 +153,8 @@ def test_len(filled_list):
 
 
 def test_eq():
-    list1 = SinglyLinkedList()
-    list2 = SinglyLinkedList()
+    list1 = DoublyLinkedList()
+    list2 = DoublyLinkedList()
     list1.extend([1, 2, 3])
     list2.extend([1, 2, 3])
     assert list1 == list2
