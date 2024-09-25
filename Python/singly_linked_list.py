@@ -55,7 +55,7 @@ class SinglyLinkedList:
         if first_item is None:
             return
         
-        if self.head is None:
+        if not self.head:
             self.head = Node(data=first_item)
             current = self.head
         else:
@@ -161,7 +161,7 @@ class SinglyLinkedList:
                 raise IndexError('Index out of range')
             current = current.next
 
-        if current is None:
+        if not current:
             raise IndexError('Index out of range')
         
         return current
@@ -183,16 +183,16 @@ class SinglyLinkedList:
             step = index.step if index.step is not None else 1
 
             for _ in range(start):
-                if current is None:
+                if not current:
                     return sliced_list
                 current = current.next
             
             for i in range(start, stop, step):
-                if current is None:
+                if not current:
                     break
                 sliced_list.append(current.data)
                 for _ in range(step):
-                    if current is None:
+                    if not current:
                         break
                     current = current.next
             return sliced_list
@@ -225,7 +225,7 @@ class SinglyLinkedList:
         iterator_other = iter(other)
         first_item = next(iterator_other, None)
         if first_item is not None:
-            if current is None:
+            if not current:
                 new_list.head = Node(data=first_item)
                 current = new_list.head
             else:
