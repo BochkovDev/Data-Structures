@@ -62,9 +62,8 @@ class SinglyLinkedList:
             current = self.head
             while current.next:
                 current = current.next
-
-        current.next = Node(data=first_item)
-        current = current.next
+            current.next = Node(data=first_item)
+            current = current.next
 
         for item in iterator:
             current.next = Node(data=item)
@@ -224,12 +223,14 @@ class SinglyLinkedList:
             current = None
 
         iterator_other = iter(other)
-        first_item = next(iterator_other)
+        first_item = next(iterator_other, None)
         if first_item is not None:
             if current is None:
                 new_list.head = Node(data=first_item)
                 current = new_list.head
             else:
+                current.next = Node(data=first_item)
+                current = current.next
                 for item in iterator_other:
                     current.next = Node(data=item)
                     current = current.next
