@@ -21,7 +21,7 @@ class SinglyLinkedList:
         self.head = head
 
     def append(self, data: Any) -> None:
-        '''Append node to the end of the list.'''
+        ''' Append node to the end of the list. '''
         new_node = Node(data=data)
         if not self.head:
             self.head = new_node
@@ -32,11 +32,11 @@ class SinglyLinkedList:
             current.next = new_node
 
     def prepend(self, data: Any) -> None:
-        '''Append node to the top of the list.'''
+        ''' Append node to the top of the list. '''
         self.head = Node(data=data, next=self.head)
 
     def insert(self, index: int, data: Any) -> None:
-        '''Insert node by index.'''
+        ''' Insert node by index. '''
         if index < 0:
             raise IndexError('Index cannot be negative')
         if index == 0:
@@ -48,7 +48,7 @@ class SinglyLinkedList:
         current.next = new_node
 
     def extend(self, iterable: Iterable[Any]) -> None:
-        '''Append elements from an iterable to the end of the list.'''
+        ''' Append elements from an iterable to the end of the list. '''
         iterator = iter(iterable)
         first_item = next(iterator, None)
 
@@ -70,7 +70,7 @@ class SinglyLinkedList:
             current = current.next
 
     def delete(self, data: Any) -> None:
-        '''Delete the first node with the value.'''
+        ''' Delete the first node with the value. '''
         if not self.head:
             return
         
@@ -86,7 +86,7 @@ class SinglyLinkedList:
             current.next = current.next.next
 
     def delete_at(self, index: int) -> None:
-        '''Delete node by index.'''
+        ''' Delete node by index. '''
         if index < 0:
             raise IndexError('Index cannot be negative')
 
@@ -103,7 +103,7 @@ class SinglyLinkedList:
         current.next = current.next.next
 
     def remove_duplicates(self) -> None:
-        '''Remove duplicates from the list.'''
+        ''' Remove duplicates from the list. '''
         if not self.head:
             return
 
@@ -119,11 +119,11 @@ class SinglyLinkedList:
                 current = current.next
 
     def clear(self) -> None:
-        '''Clear all nodes.'''
+        ''' Clear all nodes. '''
         self.head = None
 
     def find(self, data: Any) -> Optional[int]:
-        '''Find index of data.'''
+        ''' Find index of data. '''
         current = self.head
         index = 0
         while current:
@@ -134,7 +134,7 @@ class SinglyLinkedList:
         return None
 
     def reverse(self) -> None:
-        '''Reverse the list.'''
+        ''' Reverse the list. '''
         previous = None
         current = self.head
 
@@ -147,11 +147,11 @@ class SinglyLinkedList:
         self.head = previous
 
     def is_empty(self) -> bool:
-        '''Return True if the list is empty.'''
+        ''' Return True if the list is empty. '''
         return self.head is None
 
     def _get_node_at(self, index: int) -> Node:
-        '''Helper method to retrieve node by index.'''
+        ''' Helper method to retrieve node by index. '''
         if index < 0:
             raise IndexError('Index cannot be negative')
 
@@ -173,7 +173,7 @@ class SinglyLinkedList:
     def __getitem__(self, index: slice) -> 'SinglyLinkedList': ...
 
     def __getitem__(self, index: Union[int, slice]) -> Union[Any, 'SinglyLinkedList']:
-        '''Get data by index (list[index]).'''
+        ''' Get data by index (list[index]). '''
         if isinstance(index, slice):
             sliced_list = SinglyLinkedList()
             current = self.head
@@ -199,11 +199,11 @@ class SinglyLinkedList:
         return self._get_node_at(index).data
 
     def __setitem__(self, index: int, value: Any) -> None:
-        '''Set data by index (list[index] = value).'''
+        ''' Set data by index (list[index] = value). '''
         self._get_node_at(index).data = value
 
     def __delitem__(self, index: int) -> None:
-        '''Delete node by index (del list[index]).'''
+        ''' Delete node by index (del list[index]). '''
         self.delete_at(index)
 
     def __add__(self, other: 'SinglyLinkedList') -> 'SinglyLinkedList':
@@ -238,11 +238,11 @@ class SinglyLinkedList:
         return new_list
 
     def __bool__(self) -> bool:
-        '''Check if the list is not empty (bool(list)).'''
+        ''' Check if the list is not empty (bool(list)). '''
         return self.head is not None
 
     def __contains__(self, value: Any) -> bool:
-        '''Check if value exists in the list.'''
+        ''' Check if value exists in the list. '''
         return self.find(value) is not None
 
     def __eq__(self, other: 'SinglyLinkedList') -> bool:
@@ -261,14 +261,14 @@ class SinglyLinkedList:
         return current_self is None and current_other is None
 
     def __iter__(self) -> Iterator[Any]:
-        '''Iterator (for item in list).'''
+        ''' Iterator (for item in list). '''
         current = self.head
         while current:
             yield current.data
             current = current.next
 
     def __len__(self) -> int:
-        '''Get the length of the list (len(list)).'''
+        ''' Get the length of the list (len(list)). '''
         length = 0
         current = self.head
         while current:
@@ -277,7 +277,7 @@ class SinglyLinkedList:
         return length
 
     def __reversed__(self) -> Iterator[Any]:
-        '''Reverse iterator (for item in reversed(list)).'''
+        ''' Reverse iterator (for item in reversed(list)). '''
         reversed_list = []
         current = self.head
         while current:
@@ -286,9 +286,9 @@ class SinglyLinkedList:
         return iter(reversed_list)
 
     def __repr__(self) -> str:
-        '''String representation of the list (repr(list)).'''
+        ''' String representation of the list (repr(list)). '''
         return repr(list(self))
 
     def __str__(self) -> str:
-        '''String representation for print (print(list)).'''
+        ''' String representation for print (print(list)). '''
         return str(list(self))

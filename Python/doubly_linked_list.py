@@ -236,7 +236,7 @@ class DoublyLinkedList:
         return False
     
     def __eq__(self, other: 'DoublyLinkedList') -> bool:
-        '''Check if two lists are equal (list1 == list2).'''
+        ''' Check if two lists are equal (list1 == list2). '''
         if not isinstance(other, DoublyLinkedList):
             return False
         current_self = self.head
@@ -249,14 +249,14 @@ class DoublyLinkedList:
         return current_self is None and current_other is None
 
     def __iter__(self) -> Iterator[Any]:
-        '''Iterator (for item in list).'''
+        ''' Iterator (for item in list). '''
         current = self.head
         while current:
             yield current.data
             current = current.next
 
     def __len__(self) -> int:
-        '''Return the number of elements in the list (len(list)).'''
+        ''' Return the number of elements in the list (len(list)). '''
         length = 0
         current = self.head
         while current:
@@ -265,16 +265,16 @@ class DoublyLinkedList:
         return length
     
     def __reversed__(self) -> Iterator[Any]:
-        '''Iterator for backward traversal (for item in reversed(list)).'''
+        ''' Iterator for backward traversal (for item in reversed(list)). '''
         current = self.tail
         while current:
             yield current.data
             current = current.prev
 
     def __repr__(self) -> str:
-        '''String representation of the list (repr(list)).'''
+        ''' String representation of the list (repr(list)). '''
         return repr(list(self))
 
     def __str__(self) -> str:
-        '''String representation for print (print(list)).'''
+        ''' String representation for print (print(list)). '''
         return str(list(self))
